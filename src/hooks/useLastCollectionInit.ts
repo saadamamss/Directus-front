@@ -24,8 +24,7 @@ export function useLastCollectionInit() {
     }
 
     if (!savedCollection) {
-      setLastCollectionCookie("articles");
-      setLastAccessedCollection("articles");
+      setLastCollectionCookie("");
     }
     if (!savedSettings) {
       setLastSettingsCookie("/admin/settings/data-model");
