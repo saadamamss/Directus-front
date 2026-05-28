@@ -2,6 +2,8 @@ import { create } from "zustand";
 import type { CollectionResponse } from "@/types/api";
 import type { FieldResponse } from "@/lib/api/fields";
 import type { RelationResponse } from "@/lib/api/relations";
+import { fetchAllFields } from "@/lib/api/fields";
+import { fetchRelations } from "@/lib/api/relations";
 
 interface AppState {
   lastAccessedCollection: string | null;
@@ -16,9 +18,11 @@ interface AppState {
   setCollections: (collections: CollectionResponse[]) => void;
   setFields: (fields: FieldResponse[]) => void;
   setRelations: (relations: RelationResponse[]) => void;
+  refreshFields: () => void;
+  refreshRelations: () => void;
 }
 
-export const useAppStore = create<AppState>((set) => ({
+export const useAppStore = create<AppState>((set, get) => ({
   lastAccessedCollection: null,
   lastSettingsRoute: null,
   initialized: false,
@@ -31,4 +35,10 @@ export const useAppStore = create<AppState>((set) => ({
   setCollections: (collections) => set({ collections }),
   setFields: (fields) => set({ fields }),
   setRelations: (relations) => set({ relations }),
+  refreshFields: () => {
+    fetchAllFields().then((fields) => set({ fields }));
+  },
+  refreshRelations: () => {
+    fetchRelations().then((relations) => set({ relations }));
+  },
 }));
