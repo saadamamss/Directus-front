@@ -11,7 +11,6 @@ import {
   UpdateFieldPayload,
   ReorderFieldDto,
 } from "@/lib/api/fields";
-import { fetchRelations } from "@/lib/api/relations";
 import { useAppStore } from "@/stores/appStore";
 
 export function useFields(collectionId?: number) {
@@ -36,12 +35,11 @@ export function useCreateField(collectionId: number) {
   return useMutation({
     mutationFn: (payload: CreateFieldPayload) =>
       createField(collectionId, payload),
-    onSuccess: async (data) => {
+    onSuccess: (data) => {
       const store = useAppStore.getState();
       store.setFields([data, ...store.fields]);
       queryClient.invalidateQueries({ queryKey: ["collections", collectionId, "fields"] });
-      const relations = await fetchRelations();
-      store.setRelations(relations);
+      store.refreshRelations();
     },
   });
 }
@@ -98,12 +96,11 @@ export function useDeleteField(collectionId: number) {
 
   return useMutation({
     mutationFn: (fieldId: number) => deleteField(collectionId, fieldId),
-    onSuccess: async (_data, fieldId) => {
+    onSuccess: (_data, fieldId) => {
       const store = useAppStore.getState();
       store.setFields(store.fields.filter((f) => f.meta.id !== fieldId));
       queryClient.invalidateQueries({ queryKey: ["collections", collectionId, "fields"] });
-      const relations = await fetchRelations();
-      store.setRelations(relations);
+      store.refreshRelations();
     },
   });
 }
