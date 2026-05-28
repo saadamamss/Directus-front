@@ -15,6 +15,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 import Link from "next/link";
+import { toast } from "sonner";
 import { setLastCollectionCookie } from "@/lib/lastCollection";
 import { useAppStore } from "@/stores/appStore";
 import { useFields } from "@/lib/query/hooks/fields";
@@ -118,9 +119,11 @@ export default function CollectionContentPage() {
   const confirmDelete = async () => {
     try {
       await deleteItemsMutation.mutateAsync(Array.from(selectedIds));
+      toast.success(`${selectedIds.size} item(s) deleted`);
       setSelectedIds(new Set());
       setConfirmOpen(false);
-    } catch {
+    } catch (e) {
+      toast.error(e instanceof Error ? e.message : "Failed to delete items");
       setConfirmOpen(false);
     }
   };

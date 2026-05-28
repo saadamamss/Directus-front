@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { X, Box } from "lucide-react";
+import { toast } from "sonner";
 import { Drawer, DrawerContent, DrawerTitle } from "@/components/ui/drawer";
 import { useCreateField, useUpdateField } from "@/lib/query/hooks/fields";
 import { fetchFieldTypes, type FieldType as BackendFieldType } from "@/lib/api/help";
@@ -52,9 +53,31 @@ export default function FieldTypeDrawer({
 
   const handleSave = (data: CreateFieldPayload | Partial<FieldResponse>, fieldId?: number) => {
     if (fieldId) {
-      updateField.mutate({ fieldId, payload: data as UpdateFieldPayload }, { onSuccess: () => handleClose() });
+      updateField.mutate(
+        { fieldId, payload: data as UpdateFieldPayload },
+        {
+          onSuccess: () => {
+            toast.success("Field updated");
+            handleClose();
+          },
+          onError: (e) => {
+            toast.error(e instanceof Error ? e.message : "Failed to update field");
+          },
+        },
+      );
     } else {
-      createField.mutate(data as CreateFieldPayload, { onSuccess: () => handleClose() });
+      createField.mutate(
+        data as CreateFieldPayload,
+        {
+          onSuccess: () => {
+            toast.success("Field created");
+            handleClose();
+          },
+          onError: (e) => {
+            toast.error(e instanceof Error ? e.message : "Failed to create field");
+          },
+        },
+      );
     }
   };
 
@@ -65,7 +88,15 @@ export default function FieldTypeDrawer({
   };
 
   const handleSimpleSave = (data: Record<string, unknown>) => {
-    createField.mutate(data as unknown as CreateFieldPayload, { onSuccess: () => handleClose() });
+    createField.mutate(data as unknown as CreateFieldPayload, {
+      onSuccess: () => {
+        toast.success("Field created");
+        handleClose();
+      },
+      onError: (e) => {
+        toast.error(e instanceof Error ? e.message : "Failed to create field");
+      },
+    });
   };
 
   return (
