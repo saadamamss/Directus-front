@@ -1,0 +1,61 @@
+{
+	"info": {
+		"name": "DataForge API",
+		"description": "Complete DataForge API Postman collection with all endpoints organized by controller",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:5000"
+		},
+		{
+			"key": "token",
+			"value": ""
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"item": [
+		{
+			"name": "Health",
+			"item": []
+		},
+		{
+			"name": "Auth",
+			"item": []
+		},
+		{
+			"name": "Users",
+			"item": []
+		},
+		{
+			"name": "Help",
+			"item": []
+		},
+		{
+			"name": "Collections",
+			"item": []
+		},
+		{
+			"name": "Fields",
+			"item": []
+		},
+		{
+			"name": "Items",
+			"item": []
+		},
+		{
+			"name": "Upload",
+			"item": []
+		}
+	]
+}

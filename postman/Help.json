@@ -1,0 +1,37 @@
+{
+  "info": {
+    "name": "DataForge - Help",
+    "description": "Help/info endpoints for DataForge API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "GET /help/field-types",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/help/field-types",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "help", "field-types"]
+        }
+      },
+      "response": [
+        {
+          "name": "OK (200)",
+          "status": "OK",
+          "code": 200,
+          "header": [
+            { "key": "Content-Type", "value": "application/json" }
+          ],
+          "body": "{\n    \"success\": true,\n    \"message\": \"Operation successful\",\n    \"code\": \"SUCCESS\",\n    \"data\": [\n        { \"id\": 0, \"value\": \"STRING\" },\n        { \"id\": 1, \"value\": \"TEXT\" },\n        { \"id\": 2, \"value\": \"NUMBER\" },\n        { \"id\": 3, \"value\": \"BOOLEAN\" },\n        { \"id\": 4, \"value\": \"DATE\" }\n    ]\n}"
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [{ "key": "token", "value": "{{token}}", "type": "string" }]
+  },
+  "variable": [{ "key": "baseUrl", "value": "{{baseUrl}}/api/v1" }]
+}

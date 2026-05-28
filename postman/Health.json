@@ -1,0 +1,42 @@
+{
+	"info": {
+		"name": "DataForge - Health",
+		"description": "Health check endpoint for DataForge API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET /health",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/v1/health",
+					"host": ["{{baseUrl}}"],
+					"path": ["api", "v1", "health"]
+				}
+			},
+			"response": [
+				{
+					"name": "OK (200)",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/health",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "v1", "health"]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "Text",
+					"header": [{ "key": "Content-Type", "value": "application/json" }],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"message\": \"Operation successful\",\n    \"code\": \"SUCCESS\",\n    \"data\": {\n        \"status\": \"Healthy\",\n        \"database\": \"Connected\",\n        \"timestamp\": \"2026-05-18T12:00:00Z\"\n    }\n}"
+				}
+			]
+		}
+	],
+	"variable": [{ "key": "baseUrl", "value": "{{baseUrl}}/api/v1" }]
+}

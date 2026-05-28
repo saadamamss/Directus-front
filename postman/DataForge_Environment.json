@@ -1,0 +1,38 @@
+{
+	"id": "dataforge-environment",
+	"name": "DataForge Environment",
+	"values": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:5000",
+			"type": "default"
+		},
+		{
+			"key": "apiKey",
+			"value": "your-strong-api-key-here",
+			"type": "secret"
+		},
+		{
+			"key": "token",
+			"value": "",
+			"type": "secret"
+		},
+		{
+			"key": "collectionId",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "fieldId",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "itemId",
+			"value": "",
+			"type": "default"
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_variable_definition_id": "dataforge-environment"
+}

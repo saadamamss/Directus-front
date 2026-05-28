@@ -1,0 +1,155 @@
+{
+	"info": {
+		"name": "DataForge - Collections",
+		"description": "Collections endpoints for DataForge API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET /collections",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/v1/collections",
+					"host": ["{{baseUrl}}"],
+					"path": ["api", "v1", "collections"]
+				}
+			},
+			"response": [
+				{
+					"name": "OK (200)",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/collections",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "v1", "collections"]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "Text",
+					"header": [{ "key": "Content-Type", "value": "application/json" }],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"message\": \"Operation successful\",\n    \"code\": \"SUCCESS\",\n    \"data\": [\n        {\n            \"id\": \"col-guid\",\n            \"name\": \"users\",\n            \"tableName\": \"col_users\",\n            \"itemsCount\": 42,\n            \"fields\": [\n                {\n                    \"id\": \"field-guid\",\n                    \"name\": \"email\",\n                    \"label\": \"Email Address\",\n                    \"type\": \"STRING\",\n                    \"required\": true,\n                    \"sortOrder\": 1,\n                    \"hidden\": false,\n                    \"readonly\": false,\n                    \"searchable\": true,\n                    \"width\": \"full\",\n                    \"note\": null,\n                    \"createdAt\": \"2026-01-15T10:30:00Z\",\n                    \"updatedAt\": \"2026-01-15T10:30:00Z\"\n                }\n            ],\n            \"createdAt\": \"2026-01-15T10:30:00Z\",\n            \"updatedAt\": \"2026-01-15T10:30:00Z\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "POST /collections",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"users\"\n}",
+					"options": { "raw": { "language": "json" } }
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/v1/collections",
+					"host": ["{{baseUrl}}"],
+					"path": ["api", "v1", "collections"]
+				}
+			},
+			"response": [
+				{
+					"name": "Created (201)",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"users\"\n}",
+							"options": { "raw": { "language": "json" } }
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/collections",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "v1", "collections"]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "Text",
+					"header": [{ "key": "Content-Type", "value": "application/json" }],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"message\": \"Collection created.\",\n    \"code\": \"CREATED\",\n    \"data\": {\n        \"id\": \"col-guid\",\n        \"name\": \"users\",\n        \"tableName\": \"col_users\",\n        \"createdAt\": \"2026-05-18T12:00:00Z\",\n        \"updatedAt\": \"2026-05-18T12:00:00Z\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "GET /collections/{id}",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/v1/collections/{{collectionId}}",
+					"host": ["{{baseUrl}}"],
+					"path": ["api", "v1", "collections", "{{collectionId}}"]
+				}
+			},
+			"response": [
+				{
+					"name": "OK (200)",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/collections/{{collectionId}}",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "v1", "collections", "{{collectionId}}"]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "Text",
+					"header": [{ "key": "Content-Type", "value": "application/json" }],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"message\": \"Operation successful\",\n    \"code\": \"SUCCESS\",\n    \"data\": {\n        \"id\": \"col-guid\",\n        \"name\": \"users\",\n        \"tableName\": \"col_users\",\n        \"createdAt\": \"2026-01-15T10:30:00Z\",\n        \"updatedAt\": \"2026-01-15T10:30:00Z\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "DELETE /collections/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/v1/collections/{{collectionId}}",
+					"host": ["{{baseUrl}}"],
+					"path": ["api", "v1", "collections", "{{collectionId}}"]
+				}
+			},
+			"response": [
+				{
+					"name": "OK (200)",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/collections/{{collectionId}}",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "v1", "collections", "{{collectionId}}"]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "Text",
+					"header": [{ "key": "Content-Type", "value": "application/json" }],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"message\": \"Collection deleted.\",\n    \"code\": \"SUCCESS\",\n    \"data\": null\n}"
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [{ "key": "token", "value": "{{token}}", "type": "string" }]
+	},
+	"variable": [
+		{ "key": "baseUrl", "value": "{{baseUrl}}/api/v1" },
+		{ "key": "collectionId", "value": "" }
+	]
+}
