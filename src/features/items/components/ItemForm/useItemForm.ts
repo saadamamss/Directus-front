@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef, useMemo } from "react";
 import { useParams, useRouter } from "next/navigation";
+import { toast } from "sonner";
 import { useAppStore } from "@/stores/appStore";
 import { setLastCollectionCookie } from "@/lib/lastCollection";
 import {
@@ -223,14 +224,16 @@ export function useItemForm() {
     try {
       if (isCreate) {
         await createItemMutation.mutateAsync(payload);
+        toast.success("Item created");
       } else {
         await updateItemMutation.mutateAsync({ id: Number(itemId), payload });
+        toast.success("Item updated");
       }
       setLastCollectionCookie(collectionName);
       setLastAccessedCollection(collectionName);
       router.push(`/admin/content/${collectionName}`);
-    } catch {
-      /* error handled by react query */
+    } catch (e) {
+      toast.error(e instanceof Error ? e.message : "Failed to save item");
     }
   };
 
@@ -238,9 +241,10 @@ export function useItemForm() {
     if (!confirm("Delete this item?")) return;
     try {
       await deleteItemsMutation.mutateAsync([Number(itemId)]);
+      toast.success("Item deleted");
       router.push(`/admin/content/${collectionName}`);
-    } catch {
-      /* error handled by react query */
+    } catch (e) {
+      toast.error(e instanceof Error ? e.message : "Failed to delete item");
     }
   };
 

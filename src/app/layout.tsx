@@ -24,7 +24,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} antialiased`}>
         {children}
-        <Toaster position="top-center" richColors />
+        <Toaster position="bottom-left" richColors />
       </body>
     </html>
   );

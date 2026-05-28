@@ -37,7 +37,7 @@ export function useCreateField(collectionId: number) {
       createField(collectionId, payload),
     onSuccess: (data) => {
       const store = useAppStore.getState();
-      store.setFields([data, ...store.fields]);
+      store.setFields([...store.fields, data]);
       queryClient.invalidateQueries({ queryKey: ["collections", collectionId, "fields"] });
       store.refreshRelations();
     },

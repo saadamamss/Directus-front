@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Box, Check, X } from "lucide-react";
+import { toast } from "sonner";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useCreateCollection } from "@/lib/query/hooks/collections";
@@ -86,8 +87,12 @@ export default function CreateCollectionForm({
           userUpdated: data.userUpdated,
         },
       });
+      toast.success(`Collection "${data.name}" created`);
       onSuccess();
-    } catch {
+    } catch (e) {
+      const msg =
+        e instanceof Error ? e.message : "Failed to create collection";
+      toast.error(msg);
       setSubmitting(false);
     }
   };

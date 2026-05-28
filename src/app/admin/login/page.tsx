@@ -18,6 +18,7 @@ export default function LoginPage() {
         loginMutation.error instanceof Error
           ? loginMutation.error.message
           : "Invalid email or password",
+        { position: "top-center" },
       );
     }
   }, [loginMutation.error]);

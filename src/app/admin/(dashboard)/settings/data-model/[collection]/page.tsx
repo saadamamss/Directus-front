@@ -24,6 +24,7 @@ import {
   List,
   GitBranch,
 } from "lucide-react";
+import { toast } from "sonner";
 import { useAppStore } from "@/stores/appStore";
 import { setLastSettingsCookie } from "@/lib/lastCollection";
 import { useUpdateField, useReorderFields, useDeleteField } from "@/lib/query/hooks/fields";
@@ -302,6 +303,7 @@ export default function CollectionSettingsPage() {
             )}
 
             <div className="mt-6 flex flex-col gap-3">
+              {/* 
               <button
                 onClick={() => {
                   setDrawerAdvanced(false);
@@ -311,6 +313,7 @@ export default function CollectionSettingsPage() {
               >
                 + Create Field
               </button>
+              */}
           <div className="relative">
             <button
               onClick={() => setCreationMenuOpen(!creationMenuOpen)}
@@ -382,7 +385,11 @@ export default function CollectionSettingsPage() {
               </button>
               <button
                 onClick={() => {
-                  deleteField.mutate(deletingField.meta.id);
+                  deleteField.mutate(deletingField.meta.id, {
+                    onError: (e) => {
+                      toast.error(e instanceof Error ? e.message : "Failed to delete field");
+                    },
+                  });
                   setDeletingField(null);
                 }}
                 className="rounded-md bg-red-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-red-600"

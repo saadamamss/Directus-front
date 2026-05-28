@@ -18,6 +18,7 @@ import {
   Search,
   Loader2,
 } from "lucide-react";
+import { toast } from "sonner";
 import { useDeleteCollection } from "@/lib/query/hooks/collections";
 import type { CollectionResponse } from "@/types/api";
 
@@ -187,7 +188,11 @@ export default function DataModelList() {
               </button>
               <button
                 onClick={() => {
-                  deleteCollection.mutate(deletingCollection.meta.id);
+                  deleteCollection.mutate(deletingCollection.meta.id, {
+                    onError: (e) => {
+                      toast.error(e instanceof Error ? e.message : "Failed to delete collection");
+                    },
+                  });
                   setDeletingCollection(null);
                 }}
                 className="rounded-md bg-red-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-red-600"

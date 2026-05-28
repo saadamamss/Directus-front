@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
 import {
   FolderOpen,
   Upload,
@@ -87,9 +88,12 @@ export default function FilesPageContent() {
     if (!file) return;
     try {
       await uploadImage(file);
+      toast.success("File uploaded");
       const updated = await fetchFiles(currentFolderId ? currentFolderId : null);
       setFiles(updated);
-    } catch {}
+    } catch (e) {
+      toast.error(e instanceof Error ? e.message : "Failed to upload file");
+    }
     e.target.value = "";
   };
 
@@ -100,11 +104,14 @@ export default function FilesPageContent() {
         name: newFolderName.trim(),
         parentId: currentFolderId ?? undefined,
       });
+      toast.success(`Folder "${newFolderName.trim()}" created`);
       setNewFolderName("");
       setShowNewFolder(false);
       const updated = await fetchFolders(currentFolderId);
       setSubfolders(updated);
-    } catch {}
+    } catch (e) {
+      toast.error(e instanceof Error ? e.message : "Failed to create folder");
+    }
   };
 
   const toggleFileSelect = (id: string) => {
@@ -131,12 +138,15 @@ export default function FilesPageContent() {
     if (selectedFileIds.size === 0) return;
     try {
       await moveFiles(Array.from(selectedFileIds), moveTargetId);
+      toast.success("Files moved");
       setSelectedFileIds(new Set());
       setShowMoveDialog(false);
       setMoveTargetId(null);
       const updated = await fetchFiles(currentFolderId ? currentFolderId : null);
       setFiles(updated);
-    } catch {}
+    } catch (e) {
+      toast.error(e instanceof Error ? e.message : "Failed to move files");
+    }
   };
 
   const handleDelete = async () => {
@@ -152,6 +162,7 @@ export default function FilesPageContent() {
         await deleteFiles(Array.from(selectedFileIds));
       if (selectedFolderIds.size > 0)
         await deleteFolders(Array.from(selectedFolderIds));
+      toast.success("Item(s) deleted");
       setSelectedFileIds(new Set());
       setSelectedFolderIds(new Set());
       const [filesData, foldersData] = await Promise.all([
@@ -161,7 +172,9 @@ export default function FilesPageContent() {
       setFiles(filesData);
       setSubfolders(foldersData);
       queryClient.invalidateQueries({ queryKey: ["folders"] });
-    } catch {}
+    } catch (e) {
+      toast.error(e instanceof Error ? e.message : "Failed to delete items");
+    }
   };
 
   return (
