@@ -1,6 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
+/postman
 /node_modules
 /.pnp
 .pnp.*
@@ -39,3 +40,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+repomix-output.xml
+repomix-config.json
+AGENTS.md
